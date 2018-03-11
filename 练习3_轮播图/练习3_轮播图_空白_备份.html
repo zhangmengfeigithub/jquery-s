@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>焦点轮播图</title>
+	<style type="text/css">
+		/*去除内边距,没有链接下划线*/
+		* {
+			margin: 0;
+			padding: 0;
+			text-decoration: none;
+		}
+		/*让<body有20px的内边距*/
+		body {
+			padding: 20px;
+		}
+		/*最外围的div*/
+		#container {
+			width: 600px;
+			height: 400px;
+			border: 3px solid #333;/*边框3px灰色实线*/
+			overflow: hidden;
+			position: relative;/*相对定位*/
+		}
+		/*包含所有图片的<div>*/
+
+		#list {
+			width: 4200px;/*7张图片的宽: 7*600 */
+			height: 400px;
+			position: absolute; /*绝对定位*/
+			z-index: 1;
+
+		}
+		/*所有的图片<img>*/
+		#list img {
+			float: left;/*浮在左侧*/
+		}
+		/*包含所有圆点按钮的<div>*/
+		#buttons {
+			position: absolute;
+			height: 10px;
+			width: 100px;
+			z-index: 2;
+			bottom: 20px;
+			left: 250px;
+		}
+		/*所有的圆点<span>*/
+
+		#buttons span {
+			cursor: pointer;
+			float: left;
+			border: 1px solid #fff;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: #333;
+			margin-right: 5px;
+		}
+		/*第一个<span>*/
+
+		#buttons .on {
+			background: orangered;
+		}
+		/*切换图标<a>*/
+
+		.arrow {
+			cursor: pointer;
+			display: none;
+			line-height: 39px;
+			text-align: center;
+			font-size: 36px;
+			font-weight: bold;
+			width: 40px;
+			height: 40px;
+			position: absolute;
+			z-index: 2;
+			top: 180px;
+			background-color: RGBA(0, 0, 0, 0.3);
+			color: #fff;
+		}
+		/*鼠标移到切换图标上时*/
+		.arrow:hover {
+			background-color: RGBA(0, 0, 0, 0.7);
+		}
+		/*鼠标移到整个div区域时*/
+		#container:hover .arrow {
+			display: block;/*显示*/
+		}
+		/*上一个切换图标的左外边距*/
+		#prev {
+			left: 20px;
+		}
+		/*下一个切换图标的右外边距*/
+		#next {
+			right: 20px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="container">
+		<div id="list" style="left: -600px;">
+			<img src="img/5.jpg" alt="5" />
+			<img src="img/1.jpg" alt="1" />
+			<img src="img/2.jpg" alt="2" />
+			<img src="img/3.jpg" alt="3" />
+			<img src="img/4.jpg" alt="4" />
+			<img src="img/5.jpg" alt="5" />
+			<img src="img/1.jpg" alt="1" />
+		</div>
+		<div id="buttons">
+			<span index="1" class="on"></span>
+			<span index="2"></span>
+			<span index="3"></span>
+			<span index="4"></span>
+			<span index="5" ></span>
+		</div>
+		<a href="javascript:;" id="prev" class="arrow">&lt;</a>
+		<a href="javascript:;" id="next" class="arrow">&gt;</a>
+	</div>
+	<script src="js/jquery.1.10.2.js"></script>
+	<script type="text/javascript">
+		/*
+		 功能说明:
+		 1. 点击向右(左)的图标, 平滑切换到下(上)一页
+		 2. 无限循环切换: 第一页的上一页为最后页, 最后一页的下一页是第一页
+		 3. 每隔3s自动滑动到下一页
+		 4. 当鼠标进入图片区域时, 自动切换停止, 当鼠标离开后,又开始自动切换
+		 5. 切换页面时, 下面的圆点也同步更新
+		 6. 点击圆点图标切换到对应的页
+		 */
+
+		//当文档加载好了在工作
+		$(function () {
+			var PIC_WIDTH = 600;	//大写字母 下划线分隔		常量		变量
+			var counter = 1; //相框左侧的图片的数量
+			var $list = $('#list');
+			var $container = $('#container');
+			var timer = null; //初始化为 null
+			var $spans = $('#buttons>span'); //获得小黄点们
+
+			//点击向右箭头
+			$('#next').click(function () {
+				if( !$list.is(':animated') ){
+					counter++; //相框左侧的图片 加一张
+					moveTo(counter);
+				}
+			});
+
+			//点击向左箭头
+			$('#prev').click(function () {
+				if( !$list.is(':animated') ) {
+					counter--; //相框左侧的图片 加一张
+					moveTo(counter);
+				}
+			});
+
+			function moveTo(targetPage) {
+				$list.animate({
+					left: - PIC_WIDTH * targetPage
+				}, function () {
+					if(0 === targetPage){
+						$('#list').css({	//跳到第五张
+							left: -PIC_WIDTH * 5
+						});
+						counter = 5;
+					}
+					if(6 === targetPage){	//到了最后一张
+						$('#list').css({	//回到初始状态
+							left: -PIC_WIDTH
+						});
+						counter = 1;//counter 回到初始状态
+//						targetPage = 0;
+					}
+					//去除所有小黄点
+					$spans.removeClass('on');
+					//添加小黄点
+					$spans.filter('[index=' + counter + ']').addClass('on');
+//					$spans.eq( counter-1 ).addClass('on'); //eq 从0开始计数
+				});
+			}
+
+
+			//加入定时器
+			function interval() {
+				timer = setInterval(function () {
+					if( !$list.is(':animated') ){
+						counter++; //相框左侧的图片 加一张
+						moveTo(counter);
+					}
+				}, 3000);
+			}
+			interval();
+
+			//鼠标放上去停止计时
+			$container.hover(function () {
+				clearInterval(timer);
+			}, function () {
+				interval();
+			});
+
+			//小黄点 点击
+			$spans.click(function () {
+				var value = $(this).attr('index');
+				counter = value;
+				moveTo(counter);
+			})
+		})
+
+
+
+
+
+	</script>
+</body>
+
+</html>

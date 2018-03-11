@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04_形参_实参_伪数组</title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+       
+
+        function sum() {
+            var result = 0;
+            for(var i=0; i<arguments.length; i++){
+                result += arguments[i];
+            }
+
+            console.log(typeof arguments);              //是对象
+            console.log(arguments instanceof Array);    //不是数组
+
+            return result;
+        }
+        var sumResult = sum(1, 2, 3, 4);
+        console.log(sumResult);
+     
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>20_事件委托2</title>
+</head>
+
+<body>
+	<ul>
+		<li>11111</li>
+	    <li>2222</li>
+	    <li>3333</li>
+	    <li>4444</li>
+	</ul>
+	
+	<li>22222</li>
+	<br>
+	<button id="btn1">添加新的li</button><br>
+	<button id="btn2">删除ul上的事件委托的监听器</button>
+
+	<script src="js/jquery-1.10.1.js"></script>
+	<script>
+		$(function () {
+			//事件委托
+			$('ul').delegate('li', 'click', function () {
+				$(this).css('background', 'red');
+			});
+
+			$('#btn1').click(function () {
+				$('<li>zzzzzzzzz</li>').appendTo('ul');
+			});
+
+			$('#btn2').click(function () {
+				//移除ul上的click事件委托
+				$('ul').undelegate('click');
+			});
+		});
+	</script>
+</body>
+</html>

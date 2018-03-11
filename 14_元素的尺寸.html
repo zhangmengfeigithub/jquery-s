@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background: red;
+        padding: 10px;
+        border: 10px #000 solid;
+        margin: 10px;
+    }
+</style>
+</head>
+
+<body>
+    <div>div</div>
+    <script src="js/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        /*
+        			 内容尺寸
+        				 height()   height
+        				 width()  width
+        			 内部尺寸
+        				 innerHeight()    height+padding
+        				 innerWidth()   width+padding
+        			 外部尺寸
+        				 outerHeight(false/true) height+padding+border   如果是true, 加上margin
+        				 outerWidth(false/true)  width+padding+border 如果是true, 加上margin
+        			 */
+        $(function() {
+            //内容尺寸
+            var height = $('div').height();
+            var width = $('div').width();
+            console.log(height, width);
+
+            var height = $('div').height(300);
+            var width = $('div').width(300);
+            console.log(height, width);
+
+            //内部尺寸
+            var innerHeight = $('div').innerHeight();
+            var innerWidth = $('div').innerWidth();
+            console.log(innerHeight, innerWidth); // 120
+
+            var outerHeight = $('div').outerHeight();
+            var outerWidth = $('div').outerWidth();
+            console.log(outerHeight, outerWidth); // 140
+
+            //外部尺寸
+            var outerHeight = $('div').outerHeight(true);
+            var outerWidth = $('div').outerWidth(true);
+            console.log(outerHeight, outerWidth); // 160
+        });
+    </script>
+</body>
+
+</html>

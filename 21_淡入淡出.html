@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>21_淡入淡出</title>
+	</head>
+	<style type="text/css">
+		* {
+			margin: 0px;
+		}
+		.div1 {
+			position: absolute;
+			width: 200px;
+			height: 200px;
+			top: 50px;
+			left: 10px;
+			background: red;
+		}
+	</style>
+	<body>
+		<button id="btn1">慢慢淡出</button>
+		<button id="btn2">慢慢淡入</button>
+		<button id="btn3">淡出/淡入切换</button>
+		
+		<div class="div1">
+		</div>
+
+		<script src="js/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			$(function () {
+				//1. 点击 btn1 实现 慢慢淡出
+				$('#btn1').click(function(){
+					//fadeOut()
+					//$('.div1').fadeOut();  //200ms内逐渐消失
+					//$('.div1').fadeOut('slow');  //600ms内逐渐消失
+					$('.div1').fadeOut(2000);  //61000ms内逐渐消失
+				});
+
+				//2. 点击 btn3 实现 慢慢淡入
+				$('#btn2').click(function(){
+					//fadeIn()
+					$('.div1').fadeIn();  //200ms内逐渐显示
+				});
+
+				//3. 点击 btn3 实现 淡出/淡入切换
+				$('#btn3').click(function(){
+					//fadeToggle()
+					$('.div1').fadeToggle(1000, function () {
+						alert('动画完成啦....');
+					});  //切换显示或隐藏
+				});
+			});
+		</script>
+	</body>
+</html>

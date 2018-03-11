@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>01_初识jQuery</title>
+</head>
+
+<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+<script type="text/javascript">
+
+
+
+
+    //1.使用原生方法写
+    window.onload = function () {
+        document.getElementById('confirm').onclick = function () {
+            var name = document.getElementById('name').value;
+            alert(name);
+        }
+    };
+
+    //2.使用 jQuery 方法写
+    $(function () {
+        $('#confirm2').click(function () {
+            var name = $('#name').val();
+            alert(name);
+        })
+    });
+
+
+   
+</script>
+<body>
+
+
+    用户名:
+    <input type="text" name="username" id="name"/>
+    <input type="button" id="confirm" value="确定"/>
+</body>
+
+</html>

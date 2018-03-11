@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>20_事件委托.html</title>
+</head>
+
+<body>
+	<h2>点击li背景就会变为红色</h2>
+	<ul>
+		<li>11111</li>
+		<li>1111111</li>
+		<li>111111111</li>
+		<li>11111111111</li>
+	</ul>
+
+	<li>22222</li>
+	<br>
+	<button id="btn1">添加新的li</button><br>
+
+	<script src="js/jquery-1.10.1.js"></script>
+	<script>
+
+		$(function(){
+//			1. 点击 li 背景就会变为红色
+			$('ul>li').click(function () {
+				$(this).css('background', 'red');
+			});
+
+//			2. 点击 btn1 就添加一个 li
+			$('#btn1').click(function () {
+				$('<li>zzzzzzzzz</li>').appendTo('ul');
+			});
+		});
+	</script>
+</body>
+</html>

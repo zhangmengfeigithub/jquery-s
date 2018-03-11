@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>13_元素滚动</title>
+</head>
+<body style="height: 2000px;">
+	<div style="border:1px solid black;width:100px;height:150px;overflow:auto">
+		This is some text. This is some text. This is some text. This is some text.
+		This is some text. This is some text. This is some text. This is some text.
+		his is some text.
+	</div>
+	<br>
+	<br>
+	<br>
+	<button id="btn1">得到scrollTop</button>
+	<button id="btn2">设置scrollTop</button>
+
+	<script src="js/jquery-1.10.1.js"></script>
+	<script>
+		
+		$(function () {
+			$('#btn1').click(function () {
+				//div
+				var divScrollTop = $('div').scrollTop();
+				console.log(divScrollTop);
+
+				var bodyScrollTop = $('body').scrollTop(); //浏览器 chrome  好用 ，不好用的时候结果是 0
+				var htmlScrollTop = $('html').scrollTop(); //浏览器 IE fireFox
+				var sum = bodyScrollTop + htmlScrollTop;
+				console.log(sum);
+			});
+
+			$('#btn2').click(function () {
+				$('div').scrollTop(60);
+				$('body,html').scrollTop(80); //浏览器 chrome  好用
+			});
+		});
+	</script>
+</body>
+
+</html>

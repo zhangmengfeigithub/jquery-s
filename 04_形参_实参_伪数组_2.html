@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04_形参_实参_伪数组</title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        /*
+         形参: 定义函数指定的参数, 本质是一个局部变量
+         实参: 调用函数的参数, 本质是一个数据
+         */
+        var a = 1;
+        var b = '2';
+
+        function sum(a, b, c) {
+            console.log(a, b, c);
+            var result = a + b;
+            return result;
+        }
+        var sumResult = sum(a, b);
+        console.log(sumResult);
+
+
+    </script>
+</body>
+</html>

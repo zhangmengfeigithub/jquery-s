@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04_形参_实参_伪数组</title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        /*
+         arguments 获得实参列表的函数自带对象
+         伪数组:
+            1. 本质是一个对象
+            2. 具有属性名为0,1,2...的属性
+            3. 这个对象具有length属性
+
+         自定义伪数组
+            1. 声明空对象
+            2. 属性名是 数字
+            3. 定义length属性
+         */
+
+//        1. 声明空对象
+        var obj = {};
+//        2. 属性名是 数字
+        obj[0] = 1;
+        obj[1] = 5;
+        obj[2] = 7;
+//        3. 定义length属性
+        obj.length = 3;
+
+        console.log(obj[1]);
+        obj[1] = 2;
+        for(var i=0; i<obj.length; i++){
+            console.log(obj[i]);
+        }
+
+        //js 对象的属性名最终会被系统转化为 字符串
+        console.log(obj['2']);
+        obj['2'] = 11;
+        console.log(obj['2']);
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

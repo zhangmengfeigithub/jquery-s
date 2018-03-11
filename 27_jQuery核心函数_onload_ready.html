@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>window.onload与$().ready()</title>
+</head>
+<body>
+    <h1>测试window.onload与$(document).ready()</h1>
+    <img id="logo" src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png">
+
+    <script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+    <script type="text/javascript">
+        var $img = $('img'); // 大图
+        var width = $img.width();
+        console.log(width);
+        //加载完文档但还未完成相关联资源(图片)的加载时回调
+
+
+        $(document).ready(function () {
+            var width = $img.width();
+            console.log('document  ready', width);  //得不到图片的尺寸
+
+            $img.on('load', function () {
+                var width = $img.width();
+                console.log('img  load', width); //得到图片的尺寸
+            })
+        });
+
+        //加载完文档及相关资源(图片)的加载时回调
+        window.onload = function () {
+            var width = $img.width();
+            console.log('window.onload', width);
+        };
+
+        //window.onlaod 与 $(function(){}) 的多次加载
+        //加载好了之后执行
+        window.onload = function () {
+            ///////
+            console.log('aaa'); //没有被打印出来
+        };
+        window.onload = function () {
+            ///////
+            console.log('bbb');
+        };
+
+        //加载好了之后执行
+        $(function () {
+            console.log('aaa');
+        });
+        $(function () {
+            console.log('bbb');
+        });
+    </script>
+</body>
+</html>

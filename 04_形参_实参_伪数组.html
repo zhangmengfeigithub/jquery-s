@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        /*
+         形参: 定义函数指定的参数, 本质是一个局部变量
+         实参: 调用函数的参数, 本质是一个数据
+         伪数组: 具有以下2点的Object对象
+             1. 具有length属性
+             2. 具有属性名为0,1,2...的数值属性
+             arguments/getElementsByTagName()/jQuery对象都是伪数组对象
+         */
+
+        function sum(i, j) {
+            var result = i + j;
+
+            return result;
+        }
+
+        var a = 3;
+
+        console.log(sum());
+        console.log(sum("abc", 2));
+        console.log(sum(2, 4, 6));
+
+        //得到任意多个数的和
+        function sum2() { //arguments: 代表所有实参数据的伪数组
+            console.log(arguments);
+            var result = 0;
+            for (var i = 0; i < arguments.length; i++) {
+                result += arguments[i];
+
+            }
+            return result;
+        }
+        console.log(sum2(3, 5, 7, 9));
+
+        //自定义一个伪数组
+        var obj = {};
+        obj[0] = 'aa';
+        obj['1'] = 'bb';
+        obj[2] = 'cc';
+        obj.length = 3;
+
+        for (var i = 0; i < obj.length; i++) {
+            console.log(i, obj[i]);
+        }
+        console.log(obj instanceof Array);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery的二把利器</title>
+</head>
+<body>
+	<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+	<script type="text/javascript">
+		/*
+		 1. jQuery核心函数 : $ / jQuery
+		 2. jQuery核心对象 : 执行$()返回的对象就是它
+		 */
+		console.log(typeof $);   //$是一个function
+		console.log($===jQuery); //true  $与jQuery等同
+		console.log($===window.$); //true  $是一个全局函数
+
+		console.log(typeof $()); //"object"  这个对象就是jQuery对象
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>18_事件绑定与解绑</title>
+</head>
+<style type="text/css">
+	* {
+		margin: 0px;
+	}
+	.divOutter {
+		position: absolute;
+		width: 200px;
+		height: 200px;
+		top: 20px;
+		left: 10px;
+		background: blue;
+	}
+	.divInner {
+		position: absolute;
+		width: 100px;
+		height: 100px;
+		top: 50px;
+		background: red;
+	}
+	.divBtn {
+		position: absolute;
+		top: 250px;
+	}
+
+</style>
+<body style="height: 2000px;">
+<a id="a1" href="http://www.baidu.com">测试事件的默认行为</a>
+<div class="divOutter">
+	divOutter.....
+	<div class="divInner">divInner....</div>
+</div>
+<div class='divBtn'>
+	<button id="btn1">取消绑定所有事件</button>
+	<button id="btn2">取消绑定click事件</button>
+</div>
+
+
+
+<script src="js/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function () {
+//				1.给 class 为 divOutter 的 div 的点击事件绑定监听函数，打印 'divOutter clicked'
+//				$('.divOutter').on('click', function () {
+//					console.log('divOutter clicked');
+//				});
+		$('.divOutter').click(function () {
+			console.log('divOutter clicked');
+		});
+//				2.给 class 为 divInner 的 div 的点击事件绑定监听函数，打印 'divInner clicked'
+//				3.让 class 为 divInner 的 div 的点击事件阻止事件冒泡
+		$('.divInner')
+				.click(function (event) {
+					console.log('divInner clicked');
+					event.stopPropagation(); // 阻止传播 阻止时间冒泡
+				})
+				.mouseover(function (event) {
+					console.log('divInner mouseover 事件');
+				})
+				.mouseout(function (event) {
+					console.log('divInner mouseout 事件');
+				});
+
+		$('#btn1').click(function () {
+			$('.divInner').off(); //解绑
+		});
+
+//				6.给按钮 btn2 添加监听函数，这个函数使得 divInner 的 click 事件解绑
+		$('#btn2').click(function () {
+			$('.divInner').off('click'); //解绑 某一个
+//					$('.divInner').off('mouseover'); //解绑 某一个
+		});
+//				7.阻止 a1 的默认行为
+		$('#a1').click(function (event) {
+			event.preventDefault(); //阻止 默认 行为
+//					return false;
+		});
+
+		$('.divOutter').click(function (event) {
+			var iii = event;
+			console.log(event.clientX, event.clientY);
+			console.log(event.pageX, event.pageY);
+			console.log(event.offsetX, event.offsetY);
+
+		});
+
+	});
+
+</script>
+</body>
+</html>
